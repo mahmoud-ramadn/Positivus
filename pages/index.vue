@@ -77,28 +77,120 @@
     //-  toggeled rows
 
     section
-      div(class=' w-full  bg-primary  text-black md:px-[60px] md:py-[41px] rounded-[45px] border-[1px] border-black   transition-all  duration-100   ease-linear overflow-hidden ' :class="toggledIcons ? 'h-[159px]' : 'h-[279px]'" )
+      div( v-for="(item, index) in ToggeledDroblist" :key="index" class=' w-full my-3   text-black md:px-[60px] md:py-[41px] rounded-[45px] border-[1px]   border-b-8  border-black   transition-all  duration-100   ease-linear overflow-hidden ' 
+          :class="[!item.isToggled ? 'h-[159px]' : 'h-[279px]', !item.isToggled ? 'bg-primary' : 'bg-third']")
         div(class=' flex justify-between  items-center')
-          h2(class=' text-6xl font-medium flex  items-center  gap-x-5' ) 01 
-            span(class=' text-3xl ') Consultation
-          button( @click="handleToggledIcon"  type="button" class='  w-[58px] h-[58px] rounded-full flex items-center justify-center   bg-third border-[1px] border-black')
-              Icon( :name="!toggledIcons ? 'typcn:minus' : 'uil:plus'" class=' text-4xl') 
-        hr( v-if="!toggledIcons" class=' h-[2px] w-full  my-8 bg-black')
+          h2(class=' text-6xl font-medium flex  items-center  gap-x-5' ) {{item.num}}
+            span(class=' text-3xl ') {{item.titel}}
+          button( @click="handleToggledIcon(index)"  type="button" class='  w-[58px] h-[58px] rounded-full flex items-center justify-center   bg-third border-[1px] border-black')
+              Icon( :name="item.isToggled  ? 'typcn:minus' : 'uil:plus'" class=' text-4xl') 
+        hr( v-if="item.isToggled" class=' h-[2px] w-full  my-8 bg-black')
         
-        p(v-if="!toggledIcons") During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements.
-        
+        p(v-if="item.isToggled") {{item.des}}
     
+    section(class=' my-36 ')
+      div( class=' flex items-center   gap-[40px]   ')
+        h3( class='  text-4xl  font-medium bg-primary  p-2  w-fit  rounded  text-center ') Team
+        p( class=' md:w-[468px]    font-normal  md:text-lg  text-sm ') Meet the skilled and experienced team behind our successful digital marketing strategies
+          
+    section
+      div(class='  grid md:grid-cols-3     grid-cols-1  gap-10  items-center   ')
+        div( v-for="(member, index) in TeamData" :key="index" class=' col-span-1  h-[331px] md:px-6 md:py-9  rounded-[45px] border-[1px]   border-b-4  border-black  flex-col justify-center items-center flex  ') 
+          div(class='md:w-[317px]  md:h-[227px] flex flex-col items-center justify-between ' )
+            div(class=' flex justify-between  gap-2 border-b-[1px] border-black pb-5 ')
+              img(:src="member.avarat" alt="altText")
+              div( class=' self-end')
+                h4 {{member.titel}}
+                p(class=' w-28') {{member.jobTitle}}
+              button(class=' w-[41px] h-[41px] rounded-full flex items-center justify-center bg-black ')
+                Icon(name="grommet-icons:linkedin-option" width="24" height="24"  class=' text-primary')
+            p(class='  text-lg  font-thin ') {{member.des}}  
+      div(class=' w-full flex justify-end  my-10')
+        button(class=' md:w-[268px]  h-[68px]  rounded-xl text-white bg-black  flex  items-center justify-center ')  See all team     
     
+    section(class=' my-36 ')
+      div( class=' flex items-center   gap-[40px]   ')
+        h3( class='  text-4xl  font-medium bg-primary  p-2  w-fit  rounded  text-center ') Testimonials
+        p( class=' md:w-[468px]    font-normal  md:text-lg  text-sm ') Hear from Our Satisfied Clients: Read Our Testimonials to Learn More about Our Digital Marketing Services
+    //- tesimaials
 
-    
+    div(class=' w-full md:h-[625px]  rounded-[45px] bg-black pt-[84px] pb-[68px]')
+      div(class='   overflow-x-scroll  flex items-center gap-x-12 justify-center ')
+        div(class='  space-y-14')
+          div(class='md:w-[606px] h-[237px] rounded-[45px]  border-[1px] border-primary p-12 text-white relative ')
+            p "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence."
+            div(class="w-0 h-0 border-t-[1px] border-b-[1px] border-l-[1px] border-r[20px] border-transparent border-r-primary")
+          div(class='     pl-12 ')
+            h4(class=' text-lg  text-primary font-thin') John Smith
+            p(class=' text-white') Marketing Director at XYZ Corp
+        div(class='  space-y-14')
+          div(class='md:w-[606px] h-[237px] rounded-[45px]  border-[1px] border-primary p-12 text-white relative ')
+            p "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence."
+            div(class="w-0 h-0 border-t-[1px] border-b-[1px] border-l-[1px] border-r[20px] border-transparent border-r-primary")
+          div(class='     pl-12 ')
+            h4(class=' text-lg  text-primary font-thin') John Smith
+            p(class=' text-white') Marketing Director at XYZ Corp
+        div(class='  space-y-14')
+          div(class='md:w-[606px] h-[237px] rounded-[45px]  border-[1px] border-primary p-12 text-white relative ')
+            p "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence."
+            div(class="w-0 h-0 border-t-[1px] border-b-[1px] border-l-[1px] border-r[20px] border-transparent border-r-primary")
+          div(class='     pl-12 ')
+            h4(class=' text-lg  text-primary font-thin') John Smith
+            p(class=' text-white') Marketing Director at XYZ Corp
+        div(class='  space-y-14')
+          div(class='md:w-[606px] h-[237px] rounded-[45px]  border-[1px] border-primary p-12 text-white relative ')
+            p "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence."
+            div(class="w-0 h-0 border-t-[1px] border-b-[1px] border-l-[1px] border-r[20px] border-transparent border-r-primary")
+          div(class='     pl-12 ')
+            h4(class=' text-lg  text-primary font-thin') John Smith
+            p(class=' text-white') Marketing Director at XYZ Corp
+      //- indcators
+      div(class=' w-full    mt-14   flex justify-center  items-center  gap-x-8 ')
+        button 
+          Icon(name="cuida:arrow-left-outline"  class=' text-white text-xl ')
+        div(class=' flex  gap-4 items-center')
+          img(src='/Images/star.svg' alt='img')
+          img(src='/Images/whiteStart.svg' alt='img')
+          img(src='/Images/whiteStart.svg' alt='img')
+          img(src='/Images/whiteStart.svg' alt='img')
+          img(src='/Images/whiteStart.svg' alt='img')
+          img(src='/Images/whiteStart.svg' alt='img')
+        button   
+          Icon(name="cuida:arrow-right-outline"  class=' text-xl text-white')
+        //-  contacts us
+
+    section(class=' my-36 ')
+      div( class=' flex items-center   gap-[40px]   ')
+        h3( class='  text-4xl  font-medium bg-primary  p-2  w-fit  rounded  text-center ') Contact Us
+        p( class=' md:w-[468px]    font-normal  md:text-lg  text-sm ') Connect with Us: Let's Discuss Your Digital Marketing Needs
+      
+      div(class='  w-full md:h-[773px]  rounded-[45px] my-20  py-20 bg-third  overflow-hidden pl-[100px]  pt-[60xp] pb-[80px] flex  relative  justify-between   items-center ')
+        div(class='md:w-[556px] md:h-[633px]     space-y-10 ')
+          div(class=' flex  items-center gap-x-3')
+            input(type="radio" id="hi")
+            label( for='hi' class=' text-black  text-lg font-medium') Say Hi
+            input(type="radio" id="get")
+            label( for='get' class=' text-black  text-lg font-medium') Get a Quote
+          form
+            label( for='name' class='  text-base    font-medium text-black') Name
+            input(class='md:w-[559px]  h-[59px] mt-[4px] mb-[24px] border-[1px]  border-black  outline-[1px]  focus:outline-black rounded-xl pl-6 '  type='text' id='name' placeholder='Name')
+            
+            label( for='email' class='  text-base  font-medium  text-black') Email*
+            input(class='md:w-[559px]  h-[59px] mt-[4px] mb-[24px]  border-[1px]  border-black  outline-[1px]  focus:outline-black rounded-xl pl-6 '  type='email' id='email' placeholder='email')
+            
+            label( for='name' class='  text-base    font-medium text-black') Message*
+            textarea(class='md:w-[559px] mt-[4px] mb-[24px] border-[1px]  border-black  outline-[1px]  focus:outline-black rounded-xl  p-3 '  id='Message' placeholder='Message')
+            button(class='md:w-[556px]  h-[68px]   rounded-xl  bg-black text-white text-xl  focus:outline-black  font-medium ') Send Message
+        img( class='hidden md:block md:w-[691px] md:h-[648px]   absolute  top-1/2   -translate-y-1/2   -right-60  z-20 ' src='/Images/form.svg')
+
 </template>
 
 <script setup lang="ts">
-const toggledIcons=ref(false)
 
-const handleToggledIcon=()=>{
-  toggledIcons.value=!toggledIcons.value
-}
+const handleToggledIcon = (index) => {
+      ToggeledDroblist.value[index].isToggled = !ToggeledDroblist.value[index].isToggled;
+    };
+
 
 const CardsData=[
 
@@ -135,8 +227,97 @@ const CardsData=[
 
 ]
 
+
+const ToggeledDroblist = ref([
+  {
+    num: '01',
+    titel: 'Consultation',
+    des: 'During the initial consultation, we will discuss your business goals...',
+    isToggled: false
+  },
+  {
+    num: '02',
+    titel: 'Research and Strategy Development',
+    des: 'During the initial consultation, we will discuss your business goals...',
+    isToggled: false
+  },
+  {
+    num: '03',
+    titel: 'Implementation',
+    des: 'During the initial consultation, we will discuss your business goals...',
+    isToggled: false
+  },
+  {
+    num: '04',
+    titel: 'Monitoring and Optimization',
+    des: 'During the initial consultation, we will discuss your business goals...',
+    isToggled: false
+  },
+  {
+    num: '05',
+    titel: 'Reporting and Communication',
+    des: 'During the initial consultation, we will discuss your business goals...',
+    isToggled: false
+  },
+  {
+    num: '06',
+    titel: 'Continual Improvement',
+    des: 'During the initial consultation, we will discuss your business goals...',
+    isToggled: false
+  }
+]);
+
+// Team data
+
+const TeamData=ref([
+
+{
+  avarat:'/Images/Picture.svg',
+  title:'Mahmoud',
+  jobTitle:'CEO and Founder',
+  des:' 10+ years of experience in digital marketing. Expertise in SEO, PPC, and content strategy    '
+},
+{
+  avarat:'/Images/Picture.svg',
+  title:'Emily Johnson',
+  jobTitle:'PPC Manager',
+  des:' 3+ years of experience in paid search advertising. Skilled in campaign management and performance analysis   '
+},
+{
+  avarat:'/Images/Picture.svg',
+  title:'Brian Williams',
+  jobTitle:'Social Media Specialist',
+  des:' 2+ years of experience in writing and editing Skilled in creating compelling, SEO-optimized content for various industries'
+},
+{
+  avarat:'/Images/Picture.svg',
+  title:'Michael Brown',
+  jobTitle:'Senior SEO Specialist',
+  des:' 5+ years of experience in SEO and content creation. Proficient in keyword research and on-page optimization  '
+},
+{
+  avarat:'/Images/Picture.svg',
+  title:'Jane Doe',
+  jobTitle:'Director of Operations',
+  des:' 7+ years of experience in project management and team leadership. Strong organizational and communication skills   '
+},
+{
+  avarat:'/Images/Picture.svg',
+  title:'Ramadn mahmoud',
+  jobTitle:'CEO and Founder',
+  des:' 10+ years of experience in digital marketing. Expertise in SEO, PPC, and content strategy    '
+},
+
+
+])
+  
+
+
+
 </script>
 
 <style scoped>
+
+
 
 </style>
